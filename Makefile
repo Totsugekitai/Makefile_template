@@ -1,7 +1,22 @@
-.RECIPEPREFIX = > # タブを使わない
-SHELL := bash # shellをbashに変更
-.SHELLFLAGS := -eu -o pipefail -c # shell flagsの設定
-.ONESHELL: # 1つのターゲットルールに対して1つのshellにする
-MAKEFLAGS += --warn-undefined-variables # 未定義変数を警告する
-.DELETE_ON_ERROR: # 中断時に中間ファイルを削除する
-MAKEFLAGS += -r # 暗黙的なルールを常に削除
+### Makefile_template ###
+
+# don't use TAB
+.RECIPEPREFIX = >
+# change shell to bash
+SHELL := bash
+# shell flags
+.SHELLFLAGS := -eu -o pipefail -c
+# one shell for one target rule
+.ONESHELL:
+# warning undefined variables
+MAKEFLAGS += --warn-undefined-variables
+# delete intermediate files on error
+.DELETE_ON_ERROR:
+# delete implicit rules
+MAKEFLAGS += -r
+
+# MAKEFILE_DIR is directory Makefile located in
+MAKEFILE_DIR := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+
+### Makefile_template end ###
+
